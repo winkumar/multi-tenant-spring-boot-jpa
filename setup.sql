@@ -19,8 +19,8 @@ create table tenant (
 );
 
 insert into tenant values ('abc', 'jdbc:mysql://localhost:3306/tenant_abc', 'root', NULL);
-insert into tenant values ('def', 'jdbc:mysql://localhost:3306/tenant_abc', 'root', NULL);
-insert into tenant values ('ghi', 'jdbc:mysql://localhost:3306/tenant_abc', 'root', NULL);
+insert into tenant values ('def', 'jdbc:mysql://localhost:3306/tenant_def', 'root', NULL);
+insert into tenant values ('ghi', 'jdbc:mysql://localhost:3306/tenant_ghi', 'root', NULL);
 
 use tenant_abc;
 

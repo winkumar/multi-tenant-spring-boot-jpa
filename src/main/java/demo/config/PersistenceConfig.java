@@ -18,9 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackages={"demo.tenants"}, 
-    entityManagerFactoryRef="tenantEntityManagerFactory",
-    transactionManagerRef = "tenantTransactionManager")
+@EnableJpaRepositories(basePackages = {"demo.tenants" }, entityManagerFactoryRef = "tenantEntityManagerFactory", transactionManagerRef = "tenantTransactionManager")
 public class PersistenceConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean tenantEntityManagerFactory() {
@@ -28,7 +26,7 @@ public class PersistenceConfig {
         em.setDataSource(tenantDataSource());
         em.setPackagesToScan("demo.tenants");
         em.setPersistenceUnitName("tenant_pu");
-        
+
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
@@ -47,7 +45,8 @@ public class PersistenceConfig {
     }
 
     @Bean
-    public PlatformTransactionManager tenantTransactionManager(@Qualifier("tenantEntityManagerFactory") EntityManagerFactory emf) {
+    public PlatformTransactionManager tenantTransactionManager(
+            @Qualifier("tenantEntityManagerFactory") EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
 

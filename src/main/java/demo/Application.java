@@ -15,14 +15,17 @@ public class Application {
 
         DataProcessor dp = ctx.getBean(DataProcessor.class);
 
-        // prove that the setup worked
+        // iterate the tenants and show location data from each database
         for (Tenant t : dp.getTenants()) {
             System.out.println(t.getUrl());
+            CurrentTenantId.set(t.getId());
+            for (Location l : dp.getLocations()) {
+                System.out.println(l.getName());
+            }
         }
         
-        for (Location l : dp.getLocations()) {
-            System.out.println(l.getName());
-        }
+        ctx.close();
+
     }
 
 }

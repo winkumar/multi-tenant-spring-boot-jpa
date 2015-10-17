@@ -18,16 +18,16 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackages={"demo.tenants"}, 
-    entityManagerFactoryRef="tenantEntityManagerFactory",
-    transactionManagerRef = "tenantTransactionManager")
-public class PersistenceConfig {
+@EnableJpaRepositories(basePackages={"demo.locations"}, 
+    entityManagerFactoryRef="locationEntityManagerFactory",
+    transactionManagerRef = "locationTransactionManager")
+public class LocationPersistenceConfig {
     @Bean
-    public LocalContainerEntityManagerFactoryBean tenantEntityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean locationEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(tenantDataSource());
-        em.setPackagesToScan("demo.tenants");
-        em.setPersistenceUnitName("tenant_pu");
+        em.setDataSource(locationDataSource());
+        em.setPackagesToScan("demo.locations");
+        em.setPersistenceUnitName("location_pu");
         
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -37,17 +37,17 @@ public class PersistenceConfig {
     }
 
     @Bean
-    public DataSource tenantDataSource() {
+    public DataSource locationDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/tenants_db");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/tenant_abc");
         dataSource.setUsername("root");
         dataSource.setPassword(null);
         return dataSource;
     }
 
     @Bean
-    public PlatformTransactionManager tenantTransactionManager(@Qualifier("tenantEntityManagerFactory") EntityManagerFactory emf) {
+    public PlatformTransactionManager locationTransactionManager(@Qualifier("locationEntityManagerFactory") EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
 
@@ -55,7 +55,7 @@ public class PersistenceConfig {
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+    public PersistenceExceptionTranslationPostProcessor locationExceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 

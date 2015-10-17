@@ -1,5 +1,6 @@
 package demo.tenants;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -12,6 +13,8 @@ public class Tenant {
     private String id;
     private String url;
     private String username;
+    
+    @Column(name="pwd")
     private String password;
 
     public Tenant() {

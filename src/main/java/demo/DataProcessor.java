@@ -12,7 +12,7 @@ import demo.tenants.TenantRepository;
 public class DataProcessor {
     @Autowired
     private TenantRepository tenantRepository;
-    
+
     @Autowired
     private LocationRepository locationRepository;
 
@@ -20,6 +20,10 @@ public class DataProcessor {
         return tenantRepository.findAll();
     }
     
+    public void save(Tenant tenant) {
+        tenantRepository.save(tenant);
+    }
+
     public Iterable<Location> getLocations() {
         return locationRepository.findAll();
     }
